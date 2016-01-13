@@ -35,7 +35,7 @@ const Folder = React.createClass({
         }
     }) : [];
     
-    const icon = this.state.showContent ? <i className="fa fa-folder-open-o"></i> : <i className="fa fa-folder-o"></i>
+    const icon = this.props.isOpen[this.props.folderDetails.id] ? <i className="fa fa-folder-open-o"></i> : <i className="fa fa-folder-o"></i>
     
     const contentList = this.props.isOpen[this.props.folderDetails.id] ? items : null;
         return (
