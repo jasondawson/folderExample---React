@@ -8,40 +8,40 @@ const Folder = React.createClass({
       }  
     },
     handleToggle () {
-       const newState = !this.state.showContent;
-       this.setState({
-           showContent: newState
-       })  
+    //    const newState = !this.state.showContent;
+    //    this.setState({
+    //        showContent: newState
+    //    })  
+        this.props.handleToggle(this.props.folderDetails.id)
     },
     render () {
+        let that = this;
         const styles = {
             folder: {
+                padding: '2px',
                 fontWeight: 'bold',
                 fontSize: '24px'
             },
             indent: {
-                marginLeft: '10px'
+                marginLeft: '18px'
             }
         }
-        // var item = this.props.item;
-        // var name = item.name;
-    const items = this.props.item.items ? this.props.item.items.map(function(treeItem, index) {
-        console.log('treeItem', treeItem);
-        if (treeItem.type === 'file') {
-            return <File key={index} item={treeItem}/>
+        const items = this.props.folderDetails.contents ? this.props.folderDetails.contents.map((contentItem, index) => {
+        if (contentItem.type === 'file') {
+            return <File key={index} fileDetails={contentItem}/>
         }
-        if (treeItem.type === 'folder') {
-            return <Folder key={index} item={treeItem} />
+        if (contentItem.type === 'folder') {
+            return <Folder key={index} folderDetails={contentItem} handleToggle={this.props.handleToggle} isOpen={this.props.isOpen}/>
         }
     }) : [];
     
     const icon = this.state.showContent ? <i className="fa fa-folder-open-o"></i> : <i className="fa fa-folder-o"></i>
-    const content = this.state.showContent ? items : null;
-    console.log('folderContent', content);
+    
+    const contentList = this.props.isOpen[this.props.folderDetails.id] ? items : null;
         return (
             <div>
-                <div onClick={this.handleToggle} style={styles.folder}> <span>{icon}</span> {this.props.item.name} </div>
-                <div style={styles.indent}> {content} </div>
+                <div onClick={this.handleToggle} style={styles.folder}> <span>{icon}</span> {this.props.folderDetails.name} </div>
+                <div style={styles.indent}> {contentList} </div>
             </div>
             
         )

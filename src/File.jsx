@@ -1,15 +1,19 @@
 import React from 'react';
 
 const File = React.createClass({
+    handleClick (filename) {
+      console.log('Opening file: '+filename)  
+    },
     render() {
-        var styles = {
+        const styles = {
             file: {
-                fontSize: '18px',
+                fontSize: '16px',
                 fontStyle: 'italic'
             }
         }
+        const name = this.props.fileDetails.name;
         return (
-            <div style={styles.file}><span><i className="fa fa-file"></i></span> {this.props.item.name} </div>   
+            <div style={styles.file} onClick={this.handleClick.bind(null, name)}><span><i className="fa fa-file"></i></span> {name} </div>   
         )
     }
 })
