@@ -21,7 +21,7 @@ const App = React.createClass({
     },
     render: function () {
         return (
-            <Folder folderDetails={folders.folder} handleToggle={this.handleToggle} isOpen={this.state.isOpen}/>
+            <Folder folderDetails={folders.folder} handleToggle={this.handleToggle} isOpen={this.state.isOpen}root={true}/>
         )
     }
 });

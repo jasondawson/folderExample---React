@@ -16,6 +16,9 @@ const Folder = React.createClass({
     },
     render () {
         let that = this;
+        let contentList;
+        let icon;
+        
         const styles = {
             folder: {
                 padding: '2px',
@@ -35,9 +38,13 @@ const Folder = React.createClass({
         }
     }) : [];
     
-    const icon = this.props.isOpen[this.props.folderDetails.id] ? <i className="fa fa-folder-open-o"></i> : <i className="fa fa-folder-o"></i>
-    
-    const contentList = this.props.isOpen[this.props.folderDetails.id] ? items : null;
+    if (this.props.root) {
+        contentList = items;
+        icon = <i className="fa fa-folder-open-o"></i>
+    } else {
+        contentList = this.props.isOpen[this.props.folderDetails.id] ? items : null;
+        icon = this.props.isOpen[this.props.folderDetails.id] ? <i className="fa fa-folder-open-o"></i> : <i className="fa fa-folder-o"></i>
+    }
         return (
             <div>
                 <div onClick={this.handleToggle} style={styles.folder}> <span>{icon}</span> {this.props.folderDetails.name} </div>
